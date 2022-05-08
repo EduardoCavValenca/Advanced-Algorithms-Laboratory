@@ -9,7 +9,7 @@ int bs(long int low,long int high,long int coins){
     long int mid;
     long int current_coins;
 
-    while (low < high){
+    while (low <= high){
         mid = low + (high - low)/2;
 
         current_coins = (1+mid)*mid/2;
@@ -21,18 +21,17 @@ int bs(long int low,long int high,long int coins){
             high = mid - 1;
         }
         else {
-            if (low == mid) return low;
-            low = mid;
+            low = mid + 1;
         }
     }
 
-    return low;
+    return high;
 }
 
 
 int main() {
 
-    int coins;
+    long int coins;
     cin >> coins;
 
     cout << bs(1,coins,coins) << endl;
