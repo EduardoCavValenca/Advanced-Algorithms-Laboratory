@@ -27,6 +27,8 @@ int main() {
     int_fast16_t value;
     cin >> value;
 
+    bool presentation_fucking_error = false;
+
     while(value != -1){
 
         vector<int_fast16_t> missiles;
@@ -34,7 +36,9 @@ int main() {
             missiles.emplace_back(value);
             cin >> value;
         }
-        cout << "Test #"<<counter<<":\nmaximum possible interceptions: " << lds(missiles) << "\n" << endl;
+        if (presentation_fucking_error) cout << endl;
+        presentation_fucking_error = true;
+        cout << "Test #"<<counter<<":\n  maximum possible interceptions: " << lds(missiles)  << endl;
         counter++;
         cin >> value;
     }
