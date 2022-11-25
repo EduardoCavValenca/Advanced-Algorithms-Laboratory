@@ -1,53 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void print_result(bool turn_1){
-    if (turn_1)
-        cout << "Second" << endl;
-    else
+void print_result(bool winner_1){
+    if (winner_1)
         cout << "First" << endl;
+    else
+        cout << "Second" << endl;
 }
 
+bool get_winner(){
 
+    int size;
+    cin >> size;
+
+    int counter_1 = 0;
+    int first_greater_index = -1;
+
+    int value;
+    for(int i = 0; i < size; i++){
+        cin >> value;
+        if(value == 1)
+            counter_1++;
+        if(value > 1 && first_greater_index < 0)
+            first_greater_index = i;
+    }
+
+    if(counter_1 == 0)
+        return true;
+
+    if(counter_1 == size)
+        return size % 2;
+
+    return !bool(first_greater_index % 2);
+}
 
 int main(){
     int test_cases;
     cin >> test_cases;
 
+    while(test_cases--)
+        print_result(get_winner());
 
-    while(test_cases--) {
-        int size;
-        cin >> size;
-
-        int counter = 0;
-
-        vector<int> input(size);
-        for (auto &value: input) {
-            cin >> value;
-            if (value == 1)
-                counter++;
-        }
-
-        bool turn_1;
-
-        if (size == 1 || counter == 0) {
-            turn_1 = false;
-            print_result(turn_1);
-            continue;
-        }
-        if (counter == size) {
-            turn_1 = !bool(size % 2);
-            print_result(turn_1);
-            continue;
-        }
-        for (int i = 0; i < size; i++){
-            if (input[i] > 1) {
-                turn_1 = i % 2;
-                print_result(turn_1);
-                break;
-            }
-        }
-
-    }
+    return 0;
 
 }
